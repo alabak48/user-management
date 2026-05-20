@@ -1,0 +1,9 @@
+.confirmText {
+  color: var(--color-text);
+  margin-block-end: var(--space-6);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+}
