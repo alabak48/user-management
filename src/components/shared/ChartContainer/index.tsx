@@ -37,6 +37,7 @@ function ChartContainer({ children, className, fixedHeight = false, minHeight, d
     const update = () => {
       cancelAnimationFrame(rafId)
       if (debounce > 0) {
+        clearTimeout(timeoutId)
         timeoutId = setTimeout(() => {
           rafId = requestAnimationFrame(apply)
         }, debounce)
