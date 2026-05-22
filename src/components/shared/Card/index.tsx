@@ -1,4 +1,4 @@
-import type { ReactNode, ButtonHTMLAttributes } from 'react'
+import type { ReactNode } from 'react'
 import CardSkeleton, { resolveSkeletonVariant, type CardSkeletonVariant } from './CardSkeleton'
 import styles from './Card.module.css'
 
@@ -12,18 +12,6 @@ interface CardProps {
   interactive?: boolean
   loading?: boolean
   skeleton?: CardSkeletonVariant
-}
-
-export function CardButton({ children, className, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
-  return (
-    <button
-      type="button"
-      className={[styles.btn, className].filter(Boolean).join(' ')}
-      {...props}
-    >
-      {children}
-    </button>
-  )
 }
 
 function Card({
