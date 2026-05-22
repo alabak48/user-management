@@ -20,7 +20,7 @@ npm run dev
 
 | Polje    | Vrijednost          |
 |----------|---------------------|
-| Email    | admin@dashboard.com |
+| Email    | admin@admin.com |
 | Lozinka  | admin123            |
 
 
