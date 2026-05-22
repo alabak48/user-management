@@ -33,7 +33,7 @@
 }
 
 @media (min-width: 768px) {
-  .panel { width: 420px; }
+  .panel { width: 580px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

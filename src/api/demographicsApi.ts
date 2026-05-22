@@ -1,5 +1,5 @@
 import axiosInstance from './axiosInstance'
-import type { GraphUser } from './types'
+import type { GraphUser } from './userApiTypes'
 
 export type { GraphUser }
 

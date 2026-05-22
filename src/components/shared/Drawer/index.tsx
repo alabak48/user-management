@@ -1,5 +1,6 @@
 import { useEffect, type ReactNode } from "react"
 import styles from "./Drawer.module.css"
+import Button from "../Button"
 
 interface DrawerProps {
   isOpen: boolean
@@ -20,7 +21,7 @@ function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
       <div className={`${styles.panel}${isOpen ? ` ${styles.panelOpen}` : ""}`} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
           <h2 className={styles.title}>{title}</h2>
-          <button className={styles.close} onClick={onClose}>✕</button>
+          <Button variant="custom" className={styles.close} onClick={onClose}>✕</Button>
         </div>
         <div className={styles.body}>{children}</div>
       </div>

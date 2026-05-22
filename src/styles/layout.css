@@ -1,0 +1,17 @@
+@layer base {
+  main {
+    padding-inline: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    main {
+      padding-inline: var(--space-5);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    main {
+      padding-inline: var(--space-10);
+    }
+  }
+}

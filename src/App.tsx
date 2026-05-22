@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { ThemeProvider } from "./context/ThemeContext"
+import { ToastProvider } from "./components/shared/Toast"
 import LoginPage from "./pages/LoginPage"
 import UserManagementPage from "./pages/UserManagementPage"
 import PrivateRoute from "./router/PrivateRoute"
@@ -11,6 +13,8 @@ const queryClient = new QueryClient()
 
 function App() {
   return (
+    <ThemeProvider>
+    <ToastProvider>
     <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <Routes>
@@ -24,6 +28,8 @@ function App() {
       </Routes>
     </BrowserRouter>
     </QueryClientProvider>
+    </ToastProvider>
+    </ThemeProvider>
   )
 }
 

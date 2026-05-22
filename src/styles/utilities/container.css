@@ -1,0 +1,14 @@
+@layer utilities {
+  .container {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      padding-inline: var(--space-8);
+    }
+  }
+}

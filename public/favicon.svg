@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .bg   { fill: rgba(81,45,167,0.12); }
+    .head { fill: #512da7; }
+    .sh-l { fill: rgba(81,45,167,0.5); }
+    .sh-r { fill: rgba(81,45,167,0.3); }
+
+    @media (prefers-color-scheme: dark) {
+      .bg   { fill: rgba(147,112,216,0.2); }
+      .head { fill: #9370d8; }
+      .sh-l { fill: rgba(147,112,216,0.6); }
+      .sh-r { fill: rgba(147,112,216,0.35); }
+    }
+  </style>
+  <rect width="32" height="32" rx="9" class="bg"/>
+  <circle cx="16" cy="11.5" r="5.5" class="head"/>
+  <circle cx="9.5" cy="23" r="4" class="sh-l"/>
+  <circle cx="22.5" cy="23" r="4" class="sh-r"/>
+</svg>

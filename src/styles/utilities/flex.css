@@ -1,0 +1,12 @@
+@layer utilities {
+  .stack    { display: flex; flex-direction: column; }
+  .stackSm  { gap: var(--space-2); }
+  .stackMd  { gap: var(--space-4); }
+  .stackLg  { gap: var(--space-6); }
+  .stackXl  { gap: var(--space-10); }
+
+  .row        { display: flex; flex-direction: row; flex-wrap: wrap; }
+  .rowCenter  { align-items: center; justify-content: center; }
+  .rowBetween { align-items: center; justify-content: space-between; }
+  .rowEnd     { align-items: center; justify-content: flex-end; }
+}

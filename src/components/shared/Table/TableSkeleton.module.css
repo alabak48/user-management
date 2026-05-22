@@ -1,0 +1,10 @@
+.skeletonContent {
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+.skeletonCell {
+  height: 14px;
+  border-radius: var(--radius-sm);
+}

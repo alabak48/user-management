@@ -48,4 +48,5 @@ export interface User {
   id: { name: string; value: string | null }
   picture: { large: string; medium: string; thumbnail: string }
   nat: string
+  active?: boolean
 }

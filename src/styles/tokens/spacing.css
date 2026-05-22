@@ -1,0 +1,25 @@
+@layer tokens {
+  :root {
+    --space-1:  4px;
+    --space-2:  8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  20px;
+    --space-6:  24px;
+    --space-8:  32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    --space-24: 96px;
+
+    --bp-sm:      480px;
+    --bp-md:      768px;
+    --bp-lg:      1024px;
+    --bp-xl:      1280px;
+    --bp-tablet:  768px;
+    --bp-desktop: 1280px;
+
+    --header-height: 64px;
+  }
+}

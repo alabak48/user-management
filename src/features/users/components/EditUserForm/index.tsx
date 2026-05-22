@@ -1,43 +1,98 @@
+import { useRef, useState } from "react"
+import { useForm, Controller } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { LuCamera } from "react-icons/lu"
 import Button from "../../../../components/shared/Button"
 import Input from "../../../../components/shared/Input"
+import { editUserSchema, type EditUserData } from "../../../../schemas/users/editUserSchema"
 import styles from "./EditUserForm.module.css"
 
-export interface EditFormState {
-  firstName: string
-  lastName: string
-  email: string
-}
-
 interface EditUserFormProps {
-  form: EditFormState
-  onChange: (form: EditFormState) => void
-  onSave: () => void
+  defaultValues: EditUserData
+  picture: string
+  onSave: (data: EditUserData, pictureUrl: string) => void
   onCancel: () => void
 }
 
-function EditUserForm({ form, onChange, onSave, onCancel }: EditUserFormProps) {
+function EditUserForm({ defaultValues, picture, onSave, onCancel }: EditUserFormProps) {
+  const { register, handleSubmit, control, watch, formState: { errors } } = useForm<EditUserData>({
+    resolver: zodResolver(editUserSchema),
+    defaultValues,
+  })
+
+  const [previewUrl, setPreviewUrl] = useState(picture)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const isActive = watch("active")
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) setPreviewUrl(URL.createObjectURL(file))
+  }
+
   return (
-    <div className={styles.form}>
+    <form className={styles.form} onSubmit={handleSubmit((data) => onSave(data, previewUrl))} noValidate>
+      <div className={styles.avatar}>
+        <div className={styles.avatarWrapper} onClick={() => fileInputRef.current?.click()}>
+          <img src={previewUrl} alt="User avatar" className={styles.avatarImg} />
+          <div className={styles.avatarOverlay}>
+            <LuCamera className={styles.avatarOverlayIcon} size={22} />
+          </div>
+        </div>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          className={styles.fileInput}
+          onChange={handleFileChange}
+        />
+      </div>
+
       <Input
         label="First Name"
-        value={form.firstName}
-        onChange={(e) => onChange({ ...form, firstName: e.target.value })}
+        error={errors.firstName?.message}
+        {...register("firstName")}
       />
       <Input
         label="Last Name"
-        value={form.lastName}
-        onChange={(e) => onChange({ ...form, lastName: e.target.value })}
+        error={errors.lastName?.message}
+        {...register("lastName")}
       />
       <Input
         label="Email"
-        value={form.email}
-        onChange={(e) => onChange({ ...form, email: e.target.value })}
+        type="email"
+        error={errors.email?.message}
+        {...register("email")}
       />
-      <div className={styles.actions}>
-        <Button onClick={onSave}>Save</Button>
-        <Button onClick={onCancel}>Cancel</Button>
+
+      <div className={styles.statusRow}>
+        <span className={styles.statusLabel}>Status</span>
+        <Controller
+          name="active"
+          control={control}
+          render={({ field }) => (
+            <label className={styles.toggle} aria-label="Toggle active status">
+              <input
+                type="checkbox"
+                className={styles.toggleInput}
+                checked={field.value}
+                onChange={field.onChange}
+              />
+              <span className={`${styles.toggleTrack} ${field.value ? styles.toggleTrackOn : ""}`}>
+                <span className={styles.toggleThumb} />
+              </span>
+              <span className={`${styles.toggleText} ${isActive ? styles.toggleTextOn : styles.toggleTextOff}`}>
+                {isActive ? "Active" : "Inactive"}
+              </span>
+            </label>
+          )}
+        />
       </div>
-    </div>
+
+      <div className={styles.actions}>
+        <Button type="submit">Save</Button>
+        <Button type="button" variant="secondary" onClick={onCancel}>Cancel</Button>
+      </div>
+    </form>
   )
 }
 

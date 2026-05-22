@@ -1,0 +1,132 @@
+/* ── Container ─────────────────────────────────────────────── */
+
+.container {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+/* ── Toast ─────────────────────────────────────────────────── */
+
+.toast {
+  pointer-events: all;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 300px;
+  max-width: 400px;
+  padding: var(--space-3) var(--space-4);
+  padding-right: var(--space-10);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: slideIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.exiting {
+  animation: slideOut 0.28s cubic-bezier(0.55, 0, 1, 0.45) both;
+}
+
+/* ── Variants ──────────────────────────────────────────────── */
+
+.success { border-left-color: var(--color-success); }
+.error   { border-left-color: var(--color-danger); }
+.warning { border-left-color: var(--color-warning); }
+.info    { border-left-color: var(--color-info); }
+
+/* ── Icon ──────────────────────────────────────────────────── */
+
+.icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.success .icon { color: var(--color-success); }
+.error   .icon { color: var(--color-danger); }
+.warning .icon { color: var(--color-warning); }
+.info    .icon { color: var(--color-info); }
+
+/* ── Message ───────────────────────────────────────────────── */
+
+.message {
+  flex: 1;
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  color: var(--color-text);
+  line-height: var(--leading-snug);
+}
+
+/* ── Close button ──────────────────────────────────────────── */
+
+.close {
+  position: absolute;
+  top: 50%;
+  right: var(--space-3);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.close:hover {
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+}
+
+/* ── Progress bar ──────────────────────────────────────────── */
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transform-origin: left;
+  animation: progress 4s linear forwards;
+}
+
+.success .progress { background: var(--color-success); }
+.error   .progress { background: var(--color-danger); }
+.warning .progress { background: var(--color-warning); }
+.info    .progress { background: var(--color-info); }
+
+/* ── Keyframes ─────────────────────────────────────────────── */
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(calc(100% + var(--space-6))); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(calc(100% + var(--space-6))); }
+}
+
+@keyframes progress {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast, .exiting { animation: none; }
+  .progress        { animation: none; }
+}

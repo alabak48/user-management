@@ -12,11 +12,14 @@
   transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
   white-space: nowrap;
   user-select: none;
+
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
 }
 
-.btn:focus-visible {
-  outline: 2px solid var(--color-border-focus);
-  outline-offset: 2px;
+.btn:active {
+  transition-duration: 50ms;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .btn:disabled {
@@ -24,9 +27,17 @@
   pointer-events: none;
 }
 
+.btn:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn { transition: none; }
+  .spinner { animation-duration: 1.5s; }
 }
+
+/* ── Sizes ─────────────────────────────────────────────────── */
 
 .sm {
   padding: var(--space-1) var(--space-3);
@@ -34,15 +45,12 @@
   border-radius: var(--radius-sm);
 }
 
-.md {
-  padding: var(--space-2) var(--space-4);
-  font-size: var(--text-sm);
-}
-
 .lg {
   padding: var(--space-3) var(--space-6);
   font-size: var(--text-base);
 }
+
+/* ── Variants ───────────────────────────────────────────────── */
 
 .primary {
   background: var(--color-primary);
@@ -56,11 +64,31 @@
 }
 
 .primary:active {
-  transition-duration: 50ms;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .primary:disabled {
+  background: var(--color-surface-alt);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.danger {
+  background: var(--color-danger);
+  color: var(--color-text-inverse);
+  border-color: var(--color-danger);
+}
+
+.danger:hover {
+  background: var(--color-danger-hover);
+  border-color: var(--color-danger-hover);
+}
+
+.danger:active {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.danger:disabled {
   background: var(--color-surface-alt);
   border-color: var(--color-border);
   color: var(--color-text-muted);
@@ -74,6 +102,7 @@
 
 .secondary:hover {
   background: var(--color-primary-muted);
+  border-color: var(--color-primary);
 }
 
 .secondary:active {
@@ -81,9 +110,11 @@
   background: var(--color-primary-muted);
   border-color: var(--color-primary-hover);
   color: var(--color-primary-hover);
+  box-shadow: none;
 }
 
 .secondary:disabled {
+  background: transparent;
   border-color: var(--color-border);
   color: var(--color-text-muted);
 }
@@ -97,13 +128,34 @@
 .ghost:hover {
   background: var(--color-surface-alt);
   color: var(--color-text);
+  border-color: transparent;
 }
 
 .ghost:active {
   transition-duration: 50ms;
-  background: var(--color-border);
+  background: rgba(0, 0, 0, 0.08);
+  box-shadow: none;
 }
 
 .ghost:disabled {
+  background: transparent;
+  border-color: transparent;
   color: var(--color-border);
+}
+
+/* ── Spinner ────────────────────────────────────────────────── */
+
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

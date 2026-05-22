@@ -1,0 +1,279 @@
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.splitScreen {
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #0e0e10;
+}
+
+.media {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .media {
+    flex: 0 0 54%;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.orbContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  will-change: transform;
+}
+
+.orbPurple {
+  width: 580px;
+  height: 580px;
+  background: var(--purple-500);
+  opacity: 0;
+  top: 50%;
+  left: 27%;
+  animation: driftA 10s ease-in-out infinite, orbFadeInPurple 1.2s ease-out 0s forwards;
+}
+
+.orbSky {
+  width: 400px;
+  height: 400px;
+  background: var(--sky-400);
+  opacity: 0;
+  top: 36%;
+  left: 22%;
+  animation: driftB 7.5s ease-in-out infinite, orbFadeInSky 1.2s ease-out 0.35s forwards;
+}
+
+.orbRose {
+  width: 340px;
+  height: 340px;
+  background: var(--rose-500);
+  opacity: 0;
+  top: 62%;
+  left: 31%;
+  animation: driftC 12s ease-in-out infinite, orbFadeInRose 1.2s ease-out 0.7s forwards;
+}
+
+@keyframes orbFadeInPurple { to { opacity: 0.5;  } }
+@keyframes orbFadeInSky    { to { opacity: 0.28; } }
+@keyframes orbFadeInRose   { to { opacity: 0.22; } }
+
+@keyframes driftA {
+  0%,  100% { transform: translate(-50%, -50%) translate(0px, 0px) scale(1); }
+  25%        { transform: translate(-50%, -50%) translate(72px, -52px) scale(1.06); }
+  50%        { transform: translate(-50%, -50%) translate(-42px, 68px) scale(0.94); }
+  75%        { transform: translate(-50%, -50%) translate(-68px, -28px) scale(1.02); }
+}
+
+@keyframes driftB {
+  0%,  100% { transform: translate(-50%, -50%) translate(0px, 0px) scale(1); }
+  33%        { transform: translate(-50%, -50%) translate(-62px, 62px) scale(1.09); }
+  66%        { transform: translate(-50%, -50%) translate(82px, 18px) scale(0.91); }
+}
+
+@keyframes driftC {
+  0%,  100% { transform: translate(-50%, -50%) translate(0px, 0px) scale(1); }
+  20%        { transform: translate(-50%, -50%) translate(-52px, -72px) scale(1.11); }
+  40%        { transform: translate(-50%, -50%) translate(62px, -38px) scale(0.94); }
+  60%        { transform: translate(-50%, -50%) translate(42px, 78px) scale(1.06); }
+  80%        { transform: translate(-50%, -50%) translate(-58px, 48px) scale(0.97); }
+}
+
+.mediaContent {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-12) var(--space-10);
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.mediaBrand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: fadeInLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+.mediaBrandName {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.82);
+  margin-left: var(--space-2);
+  letter-spacing: var(--tracking-tight);
+}
+
+.mediaTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 2.8vw, 3rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.18;
+  letter-spacing: var(--tracking-tight);
+  animation: fadeInLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+}
+
+.mediaSubtitle {
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.7);
+  line-height: var(--leading-relaxed);
+  max-width: 38ch;
+  animation: fadeInLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+.formPanel {
+  --color-text:          #d1d5db;
+  --color-text-muted:    #9ca3af;
+  --color-text-heading:  #f9fafb;
+  --color-bg:            #0e0e10;
+  --color-surface:       #1f1f21;
+  --color-surface-alt:   #2a2a2c;
+  --color-border:        #2d2d30;
+  --color-border-focus:  #9370d8;
+  --color-primary:       #9370d8;
+  --color-primary-hover: #7b5cc4;
+  --color-primary-muted: rgba(147, 112, 216, 0.15);
+
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: transparent;
+  padding: var(--space-6) var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .formPanel {
+    padding: var(--space-8) var(--space-10) var(--space-8) 0;
+  }
+}
+
+.formCard {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.formBrand {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.formBrandName {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-text-heading);
+  margin-left: var(--space-2);
+  letter-spacing: var(--tracking-tight);
+}
+
+.formHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+.formTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-text-heading);
+  letter-spacing: var(--tracking-tight);
+}
+
+.formSubtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+  max-width: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+.formError {
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+  background: color-mix(in srgb, var(--color-danger) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 20%, transparent);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  max-width: none;
+}
+
+.submitBtn {
+  width: 100%;
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--color-primary) 45%, transparent);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbPurple { opacity: 0.5; animation: none; }
+  .orbSky    { opacity: 0.28; animation: none; }
+  .orbRose   { opacity: 0.22; animation: none; }
+
+  .mediaBrand,
+  .mediaTitle,
+  .mediaSubtitle,
+  .formBrand,
+  .formHeader,
+  .fields,
+  .submitBtn {
+    animation: none;
+    opacity: 1;
+  }
+
+  .submitBtn:hover {
+    transform: none;
+  }
+}

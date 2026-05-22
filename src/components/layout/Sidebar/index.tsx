@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom"
-import { LuLayoutGrid, LuUsers, LuChevronLeft, LuLogOut, LuSettings } from "react-icons/lu"
+import { LuLayoutGrid, LuUsers, LuLogOut, LuSettings, LuChevronLeft } from "react-icons/lu"
 import styles from "./Sidebar.module.css"
 import Button from "../../shared/Button"
 import Icon from "../../shared/Icon"
+import Logo from "../../shared/Logo"
 import { useAuthStore } from "../../../store/authStore"
 
 
@@ -32,7 +33,8 @@ const navItems: NavItem[] = [
 
 interface SidebarProps {
   collapsed: boolean
-  onToggle: () => void
+  mobileOpen?: boolean
+  onMobileClose?: () => void
 }
 
 function getDisplayName(email: string) {
@@ -45,7 +47,7 @@ function getDisplayName(email: string) {
   return { firstName, lastName, initials }
 }
 
-function Sidebar({ collapsed, onToggle }: SidebarProps) {
+function Sidebar({ collapsed, mobileOpen, onMobileClose }: SidebarProps) {
   const logout = useAuthStore((state) => state.logout)
   const user = useAuthStore((state) => state.user)
   const { firstName, lastName, initials } = user
@@ -53,18 +55,23 @@ function Sidebar({ collapsed, onToggle }: SidebarProps) {
     : { firstName: "Admin", lastName: "", initials: "A" }
 
   return (
-    <aside className={`${styles.sidebar}${collapsed ? ` ${styles.collapsed}` : ""}`} aria-label="Main navigation">
+    <aside
+      className={`${styles.sidebar}${collapsed ? ` ${styles.collapsed}` : ""}${mobileOpen ? ` ${styles.mobileOpen}` : ""}`}
+      aria-label="Main navigation"
+    >
       <div className={styles.brand}>
-        <span className={styles.brandIcon}>A</span>
-        <span className={styles.brandName}>Admin</span>
+        <span className={styles.brandIcon}>
+          <Logo size={32} />
+        </span>
+        <span className={styles.brandName}>UserHub</span>
         <Button
-          variant="ghost"
-          className={styles.toggle}
-          onClick={onToggle}
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          <Icon icon={LuChevronLeft} size={16} className={styles.toggleIcon} />
-        </Button>
+          variant="custom"
+          className={styles.closeBtn}
+          onClick={onMobileClose}
+          aria-label="Close navigation menu"
+          startIcon={LuChevronLeft}
+          iconSize={18}
+        />
       </div>
 
       <nav className={styles.nav}>
@@ -77,6 +84,7 @@ function Sidebar({ collapsed, onToggle }: SidebarProps) {
                   `${styles.navLink}${isActive ? ` ${styles.navLinkActive}` : ""}`
                 }
                 title={collapsed ? item.label : undefined}
+                onClick={onMobileClose}
               >
                 <span className={styles.navIcon}>{item.icon}</span>
                 <span className={styles.navLabel}>{item.label}</span>
@@ -88,20 +96,24 @@ function Sidebar({ collapsed, onToggle }: SidebarProps) {
 
       <div className={styles.footer}>
         <div className={styles.user}>
-          <div className={styles.userAvatar}>{initials}</div>
+          <div className={styles.userAvatarWrapper}>
+            <div className={styles.userAvatar}>{initials}</div>
+            <span className={styles.userStatus} aria-label="Active" />
+          </div>
           <div className={styles.userInfo}>
             <span className={styles.userName}>{firstName}{lastName ? ` ${lastName}` : ""}</span>
             <span className={styles.userEmail}>{user?.email}</span>
           </div>
         </div>
-        <button
+        <Button
+          variant="custom"
           className={styles.logout}
           onClick={logout}
           title={collapsed ? "Logout" : undefined}
+          startIcon={<span className={styles.navIcon}><Icon icon={LuLogOut} /></span>}
         >
-          <span className={styles.navIcon}><Icon icon={LuLogOut} /></span>
           <span className={styles.logoutLabel}>Logout</span>
-        </button>
+        </Button>
       </div>
     </aside>
   )
