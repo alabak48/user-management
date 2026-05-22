@@ -37,7 +37,7 @@
   .spinner { animation-duration: 1.5s; }
 }
 
-/* ── Sizes ─────────────────────────────────────────────────── */
+/* Sizes */
 
 .sm {
   padding: var(--space-1) var(--space-3);
@@ -50,7 +50,7 @@
   font-size: var(--text-base);
 }
 
-/* ── Variants ───────────────────────────────────────────────── */
+/* Variants */
 
 .primary {
   background: var(--color-primary);
@@ -143,7 +143,7 @@
   color: var(--color-border);
 }
 
-/* ── Spinner ────────────────────────────────────────────────── */
+/* Spinner */
 
 .spinner {
   display: inline-block;

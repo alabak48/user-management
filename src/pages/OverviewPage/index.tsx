@@ -86,7 +86,19 @@ function OverviewPage() {
             loading={isLoading}
             skeleton="chart"
             interactive={!isLoading}
-            title="User Growth"
+            title="Gender Split"
+            className={styles.genderCard}
+          >
+            {!isLoading && (
+              <GenderDonutChart maleCount={maleCount} femaleCount={femaleCount} showTitle={false} />
+            )}
+          </Card>
+
+          <Card
+            loading={isLoading}
+            skeleton="chart"
+            interactive={!isLoading}
+            title="Age Distribution"
             className={styles.growthCard}
           >
             {!isLoading && (
@@ -110,18 +122,6 @@ function OverviewPage() {
             </div>
             )}
             {!isLoading && <AgeDistributionChart data={ageGroups} showTitle={false} />}
-          </Card>
-
-          <Card
-            loading={isLoading}
-            skeleton="chart"
-            interactive={!isLoading}
-            title="Gender Split"
-            className={styles.genderCard}
-          >
-            {!isLoading && (
-              <GenderDonutChart maleCount={maleCount} femaleCount={femaleCount} showTitle={false} />
-            )}
           </Card>
         </div>
 

@@ -1,4 +1,4 @@
-/* ── Container ─────────────────────────────────────────────── */
+/* Container */
 
 .container {
   position: fixed;
@@ -12,7 +12,7 @@
   pointer-events: none;
 }
 
-/* ── Toast ─────────────────────────────────────────────────── */
+/* Toast */
 
 .toast {
   pointer-events: all;
@@ -37,14 +37,14 @@
   animation: slideOut 0.28s cubic-bezier(0.55, 0, 1, 0.45) both;
 }
 
-/* ── Variants ──────────────────────────────────────────────── */
+/* Variants */
 
 .success { border-left-color: var(--color-success); }
 .error   { border-left-color: var(--color-danger); }
 .warning { border-left-color: var(--color-warning); }
 .info    { border-left-color: var(--color-info); }
 
-/* ── Icon ──────────────────────────────────────────────────── */
+/* Icon */
 
 .icon {
   flex-shrink: 0;
@@ -57,7 +57,7 @@
 .warning .icon { color: var(--color-warning); }
 .info    .icon { color: var(--color-info); }
 
-/* ── Message ───────────────────────────────────────────────── */
+/* Message */
 
 .message {
   flex: 1;
@@ -67,7 +67,7 @@
   line-height: var(--leading-snug);
 }
 
-/* ── Close button ──────────────────────────────────────────── */
+/* Close button */
 
 .close {
   position: absolute;
@@ -92,7 +92,7 @@
   color: var(--color-text);
 }
 
-/* ── Progress bar ──────────────────────────────────────────── */
+/* Progress bar */
 
 .progress {
   position: absolute;
@@ -109,7 +109,7 @@
 .warning .progress { background: var(--color-warning); }
 .info    .progress { background: var(--color-info); }
 
-/* ── Keyframes ─────────────────────────────────────────────── */
+/* Keyframes */
 
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(calc(100% + var(--space-6))); }

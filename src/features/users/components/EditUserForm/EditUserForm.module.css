@@ -4,7 +4,7 @@
   gap: var(--space-4);
 }
 
-/* ── Avatar ──────────────────────────────────────────────── */
+/* Avatar */
 
 .avatar {
   display: flex;
@@ -60,7 +60,7 @@
   display: none;
 }
 
-/* ── Status toggle ───────────────────────────────────────── */
+/* Status toggle */
 
 .statusRow {
   display: flex;
@@ -132,7 +132,7 @@
 .toggleTextOn  { color: var(--color-success); }
 .toggleTextOff { color: var(--color-text-muted); }
 
-/* ── Actions ─────────────────────────────────────────────── */
+/* Actions */
 
 .actions {
   display: flex;

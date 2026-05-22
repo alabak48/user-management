@@ -9,7 +9,7 @@
   z-index: var(--z-modal);
 }
 
-/* ── Orbit ring ─────────────────────────────────────────────── */
+/* Orbit ring */
 
 .balls {
   position: relative;
@@ -25,7 +25,7 @@
   border-radius: 50%;
 }
 
-/* ── Colors + individual size pulses ────────────────────────── */
+/* Colors + individual size pulses */
 
 .ballPurple {
   width: 20px;
@@ -54,7 +54,7 @@
   animation-delay: -0.933s, -0.5s;
 }
 
-/* ── Size variants ──────────────────────────────────────────── */
+/* Size variants */
 
 .sm { --orbit-r: 10px; width: 32px;  height: 32px; }
 .lg { --orbit-r: 26px; width: 80px; height: 80px; }
@@ -67,7 +67,7 @@
 .lg .ballSky    { width: 14px; height: 14px; }
 .lg .ballRose   { width: 18px; height: 18px; }
 
-/* ── Keyframes ──────────────────────────────────────────────── */
+/* Keyframes */
 
 @keyframes orbit {
   from { transform: translate(-50%, -50%) rotate(0deg)   translateX(var(--orbit-r)); }

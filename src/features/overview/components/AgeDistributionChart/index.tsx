@@ -1,6 +1,6 @@
 import {
-  AreaChart,
-  Area,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -83,18 +83,7 @@ function AgeDistributionChart({ data, showTitle = true }: AgeDistributionChartPr
       {showTitle && <h3 className={styles.title}>Age Distribution by Gender</h3>}
       <ChartContainer className={styles.chartPlot} fixedHeight={showTitle}>
         {({ width, height }) => (
-        <AreaChart width={width} height={height} data={data} margin={{ top: 8, right: 16, left: -16, bottom: 0 }}>
-          <defs>
-            <linearGradient id="ageMaleGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%"  stopColor={MALE_COLOR}   stopOpacity={0.25} />
-              <stop offset="95%" stopColor={MALE_COLOR}   stopOpacity={0}    />
-            </linearGradient>
-            <linearGradient id="ageFemaleGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%"  stopColor={FEMALE_COLOR} stopOpacity={0.2}  />
-              <stop offset="95%" stopColor={FEMALE_COLOR} stopOpacity={0}    />
-            </linearGradient>
-          </defs>
-
+        <BarChart width={width} height={height} data={data} margin={{ top: 8, right: 16, left: -16, bottom: 0 }} barCategoryGap="30%" barGap={3}>
           <CartesianGrid vertical={false} stroke={border} strokeDasharray="4 4" />
 
           <XAxis
@@ -109,7 +98,7 @@ function AgeDistributionChart({ data, showTitle = true }: AgeDistributionChartPr
             tickLine={false}
           />
 
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: border, fillOpacity: 0.4 }} />
 
           <Legend
             formatter={(value) => (
@@ -119,25 +108,9 @@ function AgeDistributionChart({ data, showTitle = true }: AgeDistributionChartPr
             )}
           />
 
-          <Area
-            type="monotone"
-            dataKey="male"
-            stroke={MALE_COLOR}
-            strokeWidth={2}
-            fill="url(#ageMaleGrad)"
-            dot={false}
-            activeDot={{ r: 4, strokeWidth: 0, fill: MALE_COLOR }}
-          />
-          <Area
-            type="monotone"
-            dataKey="female"
-            stroke={FEMALE_COLOR}
-            strokeWidth={2}
-            fill="url(#ageFemaleGrad)"
-            dot={false}
-            activeDot={{ r: 4, strokeWidth: 0, fill: FEMALE_COLOR }}
-          />
-        </AreaChart>
+          <Bar dataKey="male" fill={MALE_COLOR} radius={[4, 4, 0, 0]} isAnimationActive={false} />
+          <Bar dataKey="female" fill={FEMALE_COLOR} radius={[4, 4, 0, 0]} isAnimationActive={false} />
+        </BarChart>
         )}
       </ChartContainer>
     </div>

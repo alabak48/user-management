@@ -101,6 +101,9 @@ function GenderDonutChart({ maleCount, femaleCount, showTitle = true }: GenderDo
               paddingAngle={3}
               cornerRadius={4}
               stroke="none"
+              animationBegin={350}
+              animationDuration={350}
+              animationEasing={"cubic-bezier(0, 0, 0.58, 1)" as "ease"}
             >
               {data.map((entry) => (
                 <Cell key={entry.name} fill={entry.color} />

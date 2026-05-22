@@ -56,7 +56,7 @@
   padding: var(--space-10);
 }
 
-/* ── Scrollable variant ──────────────────────────────── */
+/* Scrollable variant */
 
 .wrapperScrollable {
   max-height: 50vh;

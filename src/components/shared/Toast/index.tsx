@@ -10,8 +10,6 @@ import { LuCircleCheck, LuCircleX, LuCircleAlert, LuInfo, LuX } from "react-icon
 import Button from "../Button"
 import styles from "./Toast.module.css"
 
-// ── Types ──────────────────────────────────────────────────────
-
 export type ToastVariant = "success" | "error" | "warning" | "info"
 
 interface ToastItem {
@@ -25,8 +23,6 @@ interface ToastContextValue {
   toast: (message: string, variant?: ToastVariant) => void
 }
 
-// ── Context ────────────────────────────────────────────────────
-
 const ToastContext = createContext<ToastContextValue | null>(null)
 
 export function useToast() {
@@ -34,8 +30,6 @@ export function useToast() {
   if (!ctx) throw new Error("useToast must be used within ToastProvider")
   return ctx
 }
-
-// ── Provider ───────────────────────────────────────────────────
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<ToastItem[]>([])
@@ -65,8 +59,6 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     </ToastContext.Provider>
   )
 }
-
-// ── Toast item ─────────────────────────────────────────────────
 
 const ICONS: Record<ToastVariant, React.ElementType> = {
   success: LuCircleCheck,

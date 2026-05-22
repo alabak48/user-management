@@ -21,7 +21,9 @@ function ChartContainer({ children, className, fixedHeight = false, minHeight }:
     const el = ref.current
     if (!el) return
 
-    const update = () => {
+    let rafId: number
+
+    const apply = () => {
       const { width, height } = el.getBoundingClientRect()
       const w = Math.floor(width)
       const h = Math.floor(height)
@@ -30,10 +32,18 @@ function ChartContainer({ children, className, fixedHeight = false, minHeight }:
       }
     }
 
-    update()
+    const update = () => {
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(apply)
+    }
+
+    apply()
     const ro = new ResizeObserver(update)
     ro.observe(el)
-    return () => ro.disconnect()
+    return () => {
+      ro.disconnect()
+      cancelAnimationFrame(rafId)
+    }
   }, [])
 
   const rootClass = [styles.page, fixedHeight && styles.fixed, className].filter(Boolean).join(" ")

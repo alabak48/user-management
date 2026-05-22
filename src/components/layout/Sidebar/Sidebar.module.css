@@ -9,6 +9,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   flex-shrink: 0;
+  transition: width 280ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -254,6 +255,7 @@
 .logout {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: var(--space-3);
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
@@ -276,7 +278,7 @@
 
 .logout:hover {
   background: var(--color-surface-alt);
-  color: var(--color-danger, #ef4444);
+  color: var(--color-danger);
 }
 
 .logout:focus-visible {
@@ -295,7 +297,7 @@
   .logoutLabel { transition: none; }
 }
 
-/* ─── Close button (visible only on mobile) ───────────────── */
+/* Close button */
 
 .closeBtn {
   display: none;
@@ -327,7 +329,7 @@
   .closeBtn { transition: none; }
 }
 
-/* ─── Mobile / tablet drawer (< 1024px) ──────────────────── */
+/* Mobile / tablet drawer */
 
 @media (max-width: 1023px) {
   .sidebar {
