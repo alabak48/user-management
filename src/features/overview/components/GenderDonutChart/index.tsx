@@ -2,6 +2,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend, Label } from 'recharts'
 import ChartContainer from '../../../../components/shared/ChartContainer'
 import { useCSSVars } from '../../../../hooks/useCSSVars'
 import styles from './GenderDonutChart.module.css'
+import Header from '../../../../components/shared/Header'
 
 interface GenderDonutChartProps {
   maleCount: number
@@ -79,7 +80,7 @@ function GenderDonutChart({ maleCount, femaleCount, showTitle = true }: GenderDo
 
   return (
     <div className={rootClass}>
-      {showTitle && <h3 className={styles.title}>Gender Distribution</h3>}
+      {showTitle && <Header>Gender Distribution</Header>}
       <ChartContainer className={styles.chartPlot} fixedHeight={showTitle} minHeight={showTitle ? undefined : 200}>
         {({ width, height }) => {
           const innerRPx = Math.min(width / 2, height / 2) * (showTitle ? 0.50 : 0.52)

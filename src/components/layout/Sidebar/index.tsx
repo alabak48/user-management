@@ -5,6 +5,7 @@ import Button from "../../shared/Button"
 import Icon from "../../shared/Icon"
 import Logo from "../../shared/Logo"
 import { useAuthStore } from "../../../store/authStore"
+import { useUIStore } from "../../../store/uiStore"
 
 
 interface NavItem {
@@ -50,6 +51,8 @@ function getDisplayName(email: string) {
 function Sidebar({ collapsed, mobileOpen, onMobileClose }: SidebarProps) {
   const logout = useAuthStore((state) => state.logout)
   const user = useAuthStore((state) => state.user)
+  const setIsSidebarTransitioning = useUIStore((state) => state.setIsSidebarTransitioning)
+
   const { firstName, lastName, initials } = user
     ? getDisplayName(user.email)
     : { firstName: "Admin", lastName: "", initials: "A" }
@@ -58,6 +61,11 @@ function Sidebar({ collapsed, mobileOpen, onMobileClose }: SidebarProps) {
     <aside
       className={`${styles.sidebar}${collapsed ? ` ${styles.collapsed}` : ""}${mobileOpen ? ` ${styles.mobileOpen}` : ""}`}
       aria-label="Main navigation"
+      onTransitionStart={(e) => {
+        if (e.target === e.currentTarget && e.propertyName === "width") {
+          setIsSidebarTransitioning(true)
+        }
+      }}
     >
       <div className={styles.brand}>
         <span className={styles.brandIcon}>

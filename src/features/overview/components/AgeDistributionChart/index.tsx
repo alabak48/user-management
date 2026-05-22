@@ -11,6 +11,8 @@ import ChartContainer from '../../../../components/shared/ChartContainer'
 import type { AgeGroup } from '../../../../api/demographicsApi'
 import { useCSSVars } from '../../../../hooks/useCSSVars'
 import styles from './AgeDistributionChart.module.css'
+import { useUIStore } from '../../../../store/uiStore'
+import Header from '../../../../components/shared/Header'
 
 interface AgeDistributionChartProps {
   data: AgeGroup[]
@@ -50,6 +52,8 @@ function AgeDistributionChart({ data, showTitle = true }: AgeDistributionChartPr
 
   const tickStyle = { fontFamily: fontBody, fontSize: 12, fill: muted }
 
+  const isSidebarTransitioning = useUIStore((state) => state.isSidebarTransitioning)
+
   function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
     if (!active || !payload?.length) return null
     return (
@@ -76,12 +80,12 @@ function AgeDistributionChart({ data, showTitle = true }: AgeDistributionChartPr
     )
   }
 
-  const rootClass = [styles.chart, !showTitle && styles.chartEmbedded].filter(Boolean).join(' ')
+  const rootClass = [styles.chart, !showTitle && styles.chartEmbedded, isSidebarTransitioning && styles.freezed ].filter(Boolean).join(' ')
 
   return (
     <div className={rootClass}>
-      {showTitle && <h3 className={styles.title}>Age Distribution by Gender</h3>}
-      <ChartContainer className={styles.chartPlot} fixedHeight={showTitle}>
+      {showTitle && <Header>Age Distribution by Gender</Header>}
+      <ChartContainer className={styles.chartPlot} fixedHeight={showTitle} debounce={150}>
         {({ width, height }) => (
         <BarChart width={width} height={height} data={data} margin={{ top: 8, right: 16, left: -16, bottom: 0 }} barCategoryGap="30%" barGap={3}>
           <CartesianGrid vertical={false} stroke={border} strokeDasharray="4 4" />
@@ -108,8 +112,8 @@ function AgeDistributionChart({ data, showTitle = true }: AgeDistributionChartPr
             )}
           />
 
-          <Bar dataKey="male" fill={MALE_COLOR} radius={[4, 4, 0, 0]} isAnimationActive={false} />
-          <Bar dataKey="female" fill={FEMALE_COLOR} radius={[4, 4, 0, 0]} isAnimationActive={false} />
+          <Bar dataKey="male" fill={MALE_COLOR} radius={[4, 4, 0, 0]} isAnimationActive={!isSidebarTransitioning} />
+          <Bar dataKey="female" fill={FEMALE_COLOR} radius={[4, 4, 0, 0]} isAnimationActive={!isSidebarTransitioning} />
         </BarChart>
         )}
       </ChartContainer>

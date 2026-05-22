@@ -11,9 +11,10 @@ interface ChartContainerProps {
   className?: string
   fixedHeight?: boolean
   minHeight?: number
+  debounce?: number
 }
 
-function ChartContainer({ children, className, fixedHeight = false, minHeight }: ChartContainerProps) {
+function ChartContainer({ children, className, fixedHeight = false, minHeight, debounce = 0 }: ChartContainerProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [size, setSize] = useState<ChartSize>({ width: 0, height: 0 })
 
@@ -22,6 +23,7 @@ function ChartContainer({ children, className, fixedHeight = false, minHeight }:
     if (!el) return
 
     let rafId: number
+    let timeoutId: ReturnType<typeof setTimeout>
 
     const apply = () => {
       const { width, height } = el.getBoundingClientRect()
@@ -34,7 +36,13 @@ function ChartContainer({ children, className, fixedHeight = false, minHeight }:
 
     const update = () => {
       cancelAnimationFrame(rafId)
-      rafId = requestAnimationFrame(apply)
+      if (debounce > 0) {
+        timeoutId = setTimeout(() => {
+          rafId = requestAnimationFrame(apply)
+        }, debounce)
+      } else {
+        rafId = requestAnimationFrame(apply)
+      }
     }
 
     apply()
@@ -44,7 +52,7 @@ function ChartContainer({ children, className, fixedHeight = false, minHeight }:
       ro.disconnect()
       cancelAnimationFrame(rafId)
     }
-  }, [])
+  }, [debounce])
 
   const rootClass = [styles.page, fixedHeight && styles.fixed, className].filter(Boolean).join(" ")
 
